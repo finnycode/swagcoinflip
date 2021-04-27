@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Flip</title>
+
+</head>
+<body>
+    <h1>Flip a coin for bio lol</h1>
+    <button id="flipbutton" onclick="flip()">FLIP</button><br>
+    <div id="complicateddata">
+        <input type="text" id="amountflipped" placeholder="Times you wish to flip">
+        <button id="calculateflippedratio" onclick="calculate()">Confirm</button><br>
+        <input type="text" id="timesflippedauto" size="61px" placeholder="How many times would you like to automatically flip the coins? (max 50k)">
+        <button onclick="autoCalc()">Calculate</button>
+        <div id="reachedflips">You have reached your flip goal</div>
+        <div id="headtailratioid">Head to Tail Ratio is 1</div><br>
+        <div id="headtototalratio">Head to total ratio is</div><br>
+        <div id="tailtototalratio">Tail to total ratio is</div>
+        
+        
+
+    </div>
+    <div>
+        <h2 id="heads">You've flipped 0 heads</h2>
+        <h2 id="tails">You've flipped 0 tails</h2>
+        <h2 id="overallflips">You've flipped 0 coins</h2>
+    </div>
+    <br>
+    <button id="reset" onclick="reset()">Reset</button>
+    <br>
+    <img src="coins.jpeg" alt="" id="image" height="180px" width="400px">
+    
+    
+    
+    
+    
+    
+
+
+
+    <script>
+        var coinsrc;
+        var headsflipped = 0;
+        var tailsflipped = 0;
+        var timesflipped = 0;
+        function flip() {
+            var randomnum = Math.floor(Math.random() * 10);
+            oddoreven = randomnum % 2;
+
+            if(oddoreven == 0) {
+            document.getElementById("image").src = 'headscoin.jpeg';
+            document.getElementById("image").style.height = '100px';
+            document.getElementById("image").style.width = '100px';
+
+            headsflipped ++;
+            timesflipped ++;
+            document.getElementById("heads").innerHTML = "You've flipped " + headsflipped + " heads";
+            document.getElementById("overallflips").innerHTML = "You've flipped " + timesflipped + " coins";
+            
+
+            
+            
+
+            }
+            else {
+            document.getElementById("image").src = 'tailscoin.jpeg';
+            document.getElementById("image").style.height = '100px';
+            document.getElementById("image").style.width = '100px';
+            tailsflipped ++;
+            timesflipped ++;
+            document.getElementById("tails").innerHTML = "You've flipped " + tailsflipped + " tails"; 
+            document.getElementById("overallflips").innerHTML = "You've flipped " + timesflipped + " coins";
+            
+
+            
+
+            }
+            
+            var amountflipped = parseInt(document.getElementById("amountflipped").value)
+            if(amountflipped <= timesflipped) {
+                document.getElementById("overallflips").style.color = "green";
+                document.getElementById("headtototalratio").style.color = "green";
+                document.getElementById("tailtototalratio").style.color = "green";
+                document.getElementById("headtailratioid").style.color = "green";
+                document.getElementById("reachedflips").style.color = "green";
+                document.getElementById("reachedflips").innerHTML = "You have reached your flip goal";
+
+
+                    
+            }
+            else{
+                document.getElementById("overallflips").style.color = "red";
+                document.getElementById("headtototalratio").style.color = "red";
+                document.getElementById("tailtototalratio").style.color = "red";
+                document.getElementById("headtailratioid").style.color = "red";
+                document.getElementById("reachedflips").style.color = "red";
+                document.getElementById("reachedflips").innerHTML = "You haven't reached your flip goal";
+
+
+            }
+            var startcount = true;
+            var headtototalratio = headsflipped/timesflipped;
+            document.getElementById("headtototalratio").innerHTML = "Head to total ratio is " + headtototalratio;
+            var tailtototalratio = tailsflipped/timesflipped;
+            document.getElementById("tailtototalratio").innerHTML = "Tail to total ratio is " + tailtototalratio;
+            var headtailratio = headsflipped/tailsflipped;
+            document.getElementById("headtailratioid").innerHTML = "Head to tail ratio is " + headtailratio;
+            
+            
+
+        }
+        function reset() {
+            document.getElementById("image").src = 'coins.jpeg';
+            headsflipped = 0;
+            tailsflipped = 0;
+            timesflipped = 0;
+            headtailratio = 1;
+            document.getElementById("heads").innerHTML = "You've flipped " + headsflipped + " heads";
+            document.getElementById("tails").innerHTML = "You've flipped " + tailsflipped + " tails";
+            document.getElementById("overallflips").innerHTML = "You've flipped " + timesflipped + " coins";
+            document.getElementById("headtailratioid").innerHTML = "Head to tail ratio is " + headtailratio;
+            document.getElementById("image").style.height = "180px";
+            document.getElementById("image").style.width = "400px";
+            document.getElementById("amountflipped").value = "";
+            document.getElementById("headtototalratio").innerHTML = "Head to total ratio is ";
+            document.getElementById("tailtototalratio").innerHTML = "Tail to total ratio is ";
+            document.getElementById("timesflippedauto").value = "";
+
+            
+
+
+
+        }
+        function autoCalc() {
+            var timesrepeated = parseInt(document.getElementById("timesflippedauto").value);
+            reset();
+            if(timesrepeated <= 50000) {
+                for(var i = 0; i < (timesrepeated); i++) {
+                flip();
+
+            }
+            }
+            document.getElementById("overallflips").style.color = "green";
+            document.getElementById("headtototalratio").style.color = "green";
+            document.getElementById("tailtototalratio").style.color = "green";
+            document.getElementById("headtailratioid").style.color = "green";
+            document.getElementById("reachedflips").style.color = "green";
+            document.getElementById("reachedflips").innerHTML = "You have reached your flip goal";
+
+            }
+            
+            
+            
+        
+        
+
+    </script>
+    <style>
+        body {
+            background-color: rgb(241, 197, 238);
+            
+        }
+
+       
+    </style>
+    
+</body>
+</html>
